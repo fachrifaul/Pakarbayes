@@ -25,6 +25,9 @@ public class BayesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bayes);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         String positive = "pilek lemas flu";
         String negative = "demam batuk";
 
@@ -105,8 +108,10 @@ public class BayesActivity extends AppCompatActivity {
 
                 if (positive > negative) {
                     ((TextView) findViewById(R.id.hasil)).setText("hasil : anda punya penyakit");
+                    findViewById(R.id.hasil).setVisibility(View.VISIBLE);
                 } else {
                     ((TextView) findViewById(R.id.hasil)).setText("hasil : anda tidak punya penyakit");
+                    findViewById(R.id.hasil).setVisibility(View.GONE);
                 }
 
 

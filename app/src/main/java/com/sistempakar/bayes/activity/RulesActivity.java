@@ -54,7 +54,6 @@ public class RulesActivity extends AppCompatActivity {
     }
 
 
-
     private void initUI() {
         listView = (ListView) findViewById(R.id.list_rules);
 
@@ -95,15 +94,19 @@ public class RulesActivity extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.dialog_rules, null);
         final TextView idGejala = (TextView) view.findViewById(R.id.id_gejala);
         final EditText editNamaGelaja = (EditText) view.findViewById(R.id.input_nama_gejala);
+        final EditText editSolusiGelaja = (EditText) view.findViewById(R.id.input_solusi_gejala);
         final RadioButton radioPositive = (RadioButton) view.findViewById(R.id.radio_positive);
         final RadioButton radioNegative = (RadioButton) view.findViewById(R.id.radio_negative);
 
         idGejala.setText(rules.getIdRules());
         editNamaGelaja.setText(rules.getNamaRules());
+        editSolusiGelaja.setText(rules.getSolusiRules());
         if (rules.getPilihRules().equals("positive")) {
             radioPositive.setChecked(true);
+            editSolusiGelaja.setVisibility(View.VISIBLE);
         } else {
             radioNegative.setChecked(true);
+            editSolusiGelaja.setVisibility(View.GONE);
         }
 
         if (radioPositive.isChecked()) {
@@ -117,6 +120,7 @@ public class RulesActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     hasilGejala = radioPositive.getText().toString();
+                    editSolusiGelaja.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -126,6 +130,7 @@ public class RulesActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     hasilGejala = radioNegative.getText().toString();
+                    editSolusiGelaja.setVisibility(View.GONE);
                 }
             }
         });
@@ -138,12 +143,13 @@ public class RulesActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String nama = editNamaGelaja.getText().toString();
                         String hasil = hasilGejala;
+                        String solusi = editSolusiGelaja.getText().toString();
 
                         System.out.println("Nama Gejala : " + nama + " Hasil Gejala : " + hasil);
 
                         sqLiteHelper.updateRules(
                                 Integer.parseInt(idGejala.getText().toString()),
-                                nama, hasil);
+                                nama, hasil, solusi);
 
                         rulesAdapter.notifyDataSetChanged();
 
@@ -183,6 +189,7 @@ public class RulesActivity extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.dialog_rules, null);
         final TextView idGejala = (TextView) view.findViewById(R.id.id_gejala);
         final EditText editNamaGelaja = (EditText) view.findViewById(R.id.input_nama_gejala);
+        final EditText editSolusiGelaja = (EditText) view.findViewById(R.id.input_solusi_gejala);
         final RadioButton radioPositive = (RadioButton) view.findViewById(R.id.radio_positive);
         final RadioButton radioNegative = (RadioButton) view.findViewById(R.id.radio_negative);
 
@@ -197,6 +204,7 @@ public class RulesActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     hasilGejala = radioPositive.getText().toString();
+                    editSolusiGelaja.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -206,6 +214,7 @@ public class RulesActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     hasilGejala = radioNegative.getText().toString();
+                    editSolusiGelaja.setVisibility(View.GONE);
                 }
             }
         });
@@ -218,10 +227,12 @@ public class RulesActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String nama = editNamaGelaja.getText().toString();
                         String hasil = hasilGejala;
+                        String solusi = editSolusiGelaja.getText().toString();
+
 
                         System.out.println("Nama Gejala : " + nama + " Hasil Gejala : " + hasil);
-                        
-                        sqLiteHelper.addRules(nama, hasil);
+
+                        sqLiteHelper.addRules(nama, hasil, solusi);
                         
 					    /* restart activity */
                         finish();

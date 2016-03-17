@@ -12,55 +12,51 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:contentInsetLeft="0dp"        app:titleTextColor="@android:color/white"
-
+        app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Pakar Bayes">
+        app:title="Hasil"
+        app:titleTextColor="@android:color/white">
 
     </android.support.v7.widget.Toolbar>
 
+
     <LinearLayout
+        android:id="@+id/layout_prediksi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:paddingTop="@dimen/activity_vertical_margin"
+        >
 
-
-        <Button
-            android:id="@+id/button_konsultasi"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/hasilpositive"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Konsultasi"/>
+            android:text="hasilpositive"/>
 
-        <Button
-            android:id="@+id/button_pakar"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/hasilnegative"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pakar"/>
+            android:text="hasilnegative"/>
 
-        <Button
-            android:id="@+id/button_rules"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/hasil"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rules"/>
+            android:text="hasil"/>
 
-        <Button
-            android:id="@+id/button_tentang"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/solusi"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tentang"/>
-
-        <Button
-            android:id="@+id/button_bantuan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bantuan"/>
+            android:text="solusi"/>
     </LinearLayout>
 </RelativeLayout>

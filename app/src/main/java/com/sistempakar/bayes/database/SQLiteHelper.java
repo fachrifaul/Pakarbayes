@@ -19,9 +19,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String tabelID = "id_gejala";
     private static final String tabelNamaGejala = "nama_gejala";
     private static final String tabelJenisGejala = "jenis_gejala";
+    private static final String tabelSolusiGejala = "solusi_gejala";
+
     private static final String query_buat_tabel_gejala_epilepsi =
             "CREATE TABLE IF NOT EXISTS " + namaTabel + "(" + tabelID
-                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + tabelNamaGejala + " TEXT," + tabelJenisGejala + " TEXT)";
+                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + tabelNamaGejala + " TEXT," + tabelJenisGejala + " TEXT,"
+                    + tabelSolusiGejala + " TEXT)";
     private static final String query_hapus_tabel_gejala_epilepsi = "DROP TABLE IF EXISTS query_buat_tabel_gejala_epilepsi";
 
     public SQLiteHelper(Context context) {
@@ -41,11 +44,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addRules(String nama_gejala, String jenis_gejala) {
+    public void addRules(String namaGejala, String jenisGejala, String solusiGejala) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(tabelNamaGejala, nama_gejala);
-        values.put(tabelJenisGejala, jenis_gejala);
+        values.put(tabelNamaGejala, namaGejala.toLowerCase());
+        values.put(tabelJenisGejala, jenisGejala);
+        values.put(tabelSolusiGejala, solusiGejala);
         database.insert(namaTabel, null, values);
         database.close();
     }
@@ -61,7 +65,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         // kursor langsung diarkan ke posisi paling awal data pada namaTabel
         if (cursor.moveToFirst()) {
             do {
-                arrayListRules.add(new Rules(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
+                arrayListRules.add(new Rules(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
 
             } while (cursor.moveToNext());
         }
@@ -88,12 +92,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return arrayListGejala;
     }
 
-    public int updateRules(int id, String nama_gejala, String jenis_gejala) {
+    public int updateRules(int id, String namaGejala, String jenisGejala, String solusiGejala) {
         SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues recordBiodata = new ContentValues();
-        recordBiodata.put(tabelNamaGejala, nama_gejala);
-        recordBiodata.put(tabelJenisGejala, jenis_gejala);
-        return database.update(namaTabel, recordBiodata, "id_gejala=" + id, null);
+        ContentValues values = new ContentValues();
+        values.put(tabelNamaGejala, namaGejala);
+        values.put(tabelJenisGejala, jenisGejala);
+        values.put(tabelSolusiGejala, solusiGejala);
+        return database.update(namaTabel, values, "id_gejala=" + id, null);
     }
 
     public void deleteRules(int id) {
@@ -111,7 +116,22 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                rules = new Rules(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                rules = new Rules(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            } while (cursor.moveToNext());
+        }
+
+        return rules;
+    }
+
+    public Rules getDataByNamaGejala(String namaGejala) {
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        Rules rules = null;
+        Cursor cursor = database.rawQuery("SELECT * FROM " + namaTabel + " WHERE nama_gejala='" + namaGejala + "'", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                rules = new Rules(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
             } while (cursor.moveToNext());
         }
 
@@ -122,8 +142,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(namaTabel, new String[]{tabelID,
-                        tabelNamaGejala, tabelJenisGejala}, tabelNamaGejala + "=?",
-                new String[]{nama_gejala}, null, null, null, null);
+                        tabelNamaGejala, tabelJenisGejala, tabelSolusiGejala}, tabelNamaGejala + "=?",
+                new String[]{nama_gejala.toLowerCase()}, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             return true;
@@ -144,7 +164,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         // kursor langsung diarkan ke posisi paling awal data pada namaTabel
         if (cursor.moveToFirst()) {
             do {
-                arrayListRules.add(new Rules(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
+                arrayListRules.add(new Rules(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3)));
 
             } while (cursor.moveToNext());
         }

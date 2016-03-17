@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sistempakar.bayes">
+<manifest package="com.sistempakar.bayes"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -10,14 +10,16 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.HomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BayesActivity" />
-        <activity android:name=".activity.GejalaActivity" />
-        <activity android:name=".activity.RulesActivity" />
+        <activity android:name=".activity.BayesActivity"/>
+        <activity android:name=".activity.GejalaActivity"/>
+        <activity android:name=".activity.RulesActivity"/>
+        <activity android:name=".activity.HasilActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -42,9 +42,10 @@ public class HomeActivity extends AppCompatActivity {
     private void addGejala() {
         String[] namaGejala = {"Batuk", "Pilek"};
         String[] jenisGejala = {"positive", "negative"};
+        String[] solusiGejala = {"Memberi Aspirin", null};
         for (int i = 0; i < namaGejala.length; i++) {
             if(!sqLiteHelper.checkIfExist(namaGejala[i])){
-                sqLiteHelper.addRules(namaGejala[i], jenisGejala[i]);
+                sqLiteHelper.addRules(namaGejala[i], jenisGejala[i],solusiGejala[i]);
             }
         }
     }

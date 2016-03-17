@@ -1,7 +1,10 @@
 package com.sistempakar.bayes.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,6 +24,7 @@ import com.sistempakar.bayes.model.Rules;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class GejalaActivity extends AppCompatActivity {
@@ -37,14 +41,20 @@ public class GejalaActivity extends AppCompatActivity {
     //    final String[] positiveText = positive.toLowerCase().split("\\s");
 //    final String[] negativeText = negative.toLowerCase().split("\\s");
     private Button buttonPrediksi;
+    private TextView textViewHasil, textViewSolusi;
     private ArrayList<Gejala> arrayList = new ArrayList<>();
     private GejalaAdapter gejalaAdapter;
     private SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+    private String  solusiPrediksi = "";
+    private boolean hasilPrediksi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gejala);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initUI();
         initAction();
 
@@ -54,6 +64,8 @@ public class GejalaActivity extends AppCompatActivity {
     private void initUI() {
         listView = (ListView) findViewById(R.id.list_gejala);
         buttonPrediksi = (Button) findViewById(R.id.button_prediksi);
+        textViewHasil = (TextView) findViewById(R.id.hasil);
+        textViewSolusi = (TextView) findViewById(R.id.solusi);
 
     }
 
@@ -136,7 +148,7 @@ public class GejalaActivity extends AppCompatActivity {
         String hasil = ((BayesClassifier<String, String>) bayes).classifyDetailed(
                 Arrays.asList(unknownText1)).toString();
 
-        System.out.println(((BayesClassifier<String, String>) bayes).classifyDetailed(
+        System.out.println("hasil : " + ((BayesClassifier<String, String>) bayes).classifyDetailed(
                 Arrays.asList(unknownText1)));
 
         Gson gson = new Gson();
@@ -147,7 +159,6 @@ public class GejalaActivity extends AppCompatActivity {
         double positive = 0, negative = 0;
 
         for (int i = 0; i < listBayes.size(); i++) {
-
             if (listBayes.get(i).category.equals("positive")) {
                 ((TextView) findViewById(R.id.hasilpositive)).setText("hasil positive : " + listBayes.get(i).probability);
                 positive = listBayes.get(i).probability;
@@ -156,16 +167,27 @@ public class GejalaActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.hasilnegative)).setText("hasil negative : " + listBayes.get(i).probability);
                 negative = listBayes.get(i).probability;
             }
-
         }
+
 
         if (gejalanya.equals("")) {
-            ((TextView) findViewById(R.id.hasil)).setText("hasil : anda tidak punya penyakit");
+            hasilPrediksi = false;
         } else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("positive")) {
-            ((TextView) findViewById(R.id.hasil)).setText("hasil : anda punya penyakit");
+            hasilPrediksi = true;
+            Collection<String> gejalagejala = bayes.classify(Arrays.asList(unknownText1)).getFeatureset();
+            solusiPrediksi = tampilSoulisi(gejalagejala);
         } else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("negative")) {
-            ((TextView) findViewById(R.id.hasil)).setText("hasil : anda tidak punya penyakit");
+            hasilPrediksi = false;
         }
+
+
+        Intent intent = new Intent(GejalaActivity.this,
+                HasilActivity.class);
+        intent.putExtra("hasil_positive", positive);
+        intent.putExtra("hasil_negative", negative);
+        intent.putExtra("hasil", hasilPrediksi);
+        intent.putExtra("solusi", solusiPrediksi);
+        startActivity(intent);
 
 
         /*
@@ -197,5 +219,30 @@ public class GejalaActivity extends AppCompatActivity {
          * number of learning sessions it will record can be set as follows:
          */
         bayes.setMemoryCapacity(500); // remember the last 500 learned classifications
+    }
+
+    private String tampilSoulisi(Collection<String> gejalagejala) {
+        String solusi = "";
+
+        for (String gejala : gejalagejala) {
+            final Rules rules = sqLiteHelper.getDataByNamaGejala(gejala);
+            if (rules.getSolusiRules() != null) {
+                solusi += rules.getSolusiRules() + ",";
+            }
+        }
+
+        return solusi;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

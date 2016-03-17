@@ -50,4 +50,18 @@
     </RadioGroup>
 
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+        <EditText
+            android:id="@+id/input_solusi_gejala"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Solusi Gejala"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+
 </LinearLayout>
