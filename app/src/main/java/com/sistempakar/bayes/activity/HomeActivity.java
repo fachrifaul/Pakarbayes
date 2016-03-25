@@ -24,13 +24,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.button_pakar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, BayesActivity.class));
-            }
-        });
-
         findViewById(R.id.button_rules).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

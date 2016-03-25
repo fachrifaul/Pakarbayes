@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,15 +25,19 @@ import com.sistempakar.bayes.model.Rules;
 public class RulesActivity extends AppCompatActivity {
     private ListView listView;
     private RulesAdapter rulesAdapter;
-
     private SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+
     private String hasilGejala = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules2);
-        initUI();
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        listView = (ListView) findViewById(R.id.list_rules);
+
         setCallBack();
     }
 
@@ -45,17 +50,14 @@ public class RulesActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
             case R.id.action_add:
                 showDialogAdd();
                 break;
         }
         return super.onOptionsItemSelected(item);
-
-    }
-
-
-    private void initUI() {
-        listView = (ListView) findViewById(R.id.list_rules);
 
     }
 
@@ -251,4 +253,5 @@ public class RulesActivity extends AppCompatActivity {
                 });
         builderAddRules.show();
     }
+
 }

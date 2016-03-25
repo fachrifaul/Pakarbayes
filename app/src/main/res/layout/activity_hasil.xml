@@ -3,6 +3,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,41 +23,129 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layout_prediksi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
         >
 
-        <TextView
-            android:id="@+id/hasilpositive"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hasilpositive"/>
+            android:layout_above="@+id/detail_additional_pane"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/hasilnegative"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="hasilnegative"/>
+            <ImageView
+                android:id="@+id/imageview_hasil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_correct"/>
 
-        <TextView
-            android:id="@+id/hasil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="hasil"/>
+            <TextView
+                android:id="@+id/hasil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnSpan="4"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="Anda Punya Penyakit"/>
 
-        <TextView
-            android:id="@+id/solusi"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnSpan="4"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:fontFamily="sans-serif"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                tools:text="Solusi :"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/solusi"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_columnSpan="4"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        tools:text="Memberikan aspirin"/>
+                </RelativeLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.GridLayout
+            android:id="@+id/detail_additional_pane"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="solusi"/>
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_weight="2"
+            android:background="@color/footer_bg"
+            android:padding="20dp"
+            app:columnCount="2"
+            >
+
+            <TextView
+                android:id="@+id/detail_humidity_label_textview"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:text="Hasil Positif"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/footer_label"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+
+                app:layout_rowWeight="1"/>
+
+            <TextView
+                android:id="@+id/hasilpositive"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@android:color/white"
+                app:layout_gravity="fill"
+                tools:text="0.0245673"/>
+
+            <TextView
+                android:id="@+id/detail_humidity_label_textview2"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:text="Hasil Negatif"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/footer_label"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill"
+                app:layout_rowWeight="1"/>
+
+            <TextView
+                android:id="@+id/hasilnegative"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@android:color/white"
+                app:layout_gravity="fill"
+                tools:text="0.0245673"/>
+        </android.support.v7.widget.GridLayout>
+
+
+    </RelativeLayout>
 </RelativeLayout>

@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="indigo1">#009688</color>
+    <color name="indigo2">#F44336</color>
+    <color name="indigo3">#2196F3</color>
+    <color name="indigo4">#FFEB3B</color>
+    <color name="footer_bg">#546E7A</color>
+    <color name="footer_label">#90A4AE</color>
 </resources>

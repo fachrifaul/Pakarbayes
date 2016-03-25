@@ -97,6 +97,7 @@ public class GejalaActivity extends AppCompatActivity {
 
     }
 
+    //teroma bayes
     private void initBayes(String gejalanya) {
 
         arrayListRulesPositive = sqLiteHelper.showAllRulesByType("positive");
