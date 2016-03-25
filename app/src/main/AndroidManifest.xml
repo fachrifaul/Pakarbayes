@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.sistempakar.bayes"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.sistempakar.bayes">
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,10 @@
         <activity android:name=".activity.GejalaActivity"/>
         <activity android:name=".activity.RulesActivity"/>
         <activity android:name=".activity.HasilActivity">
+        </activity>
+        <activity android:name=".activity.TentangActivity">
+        </activity>
+        <activity android:name=".activity.BantuanActivity">
         </activity>
     </application>
 
