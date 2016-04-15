@@ -4,17 +4,23 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
+import com.sistempakar.bayes.R;
 import com.sistempakar.bayes.model.Gejala;
 import com.sistempakar.bayes.model.Rules;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.zip.ZipInputStream;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
-
-    private static final String namaDatabase = "database_epilepsi.db";
-    private static final int versiDatabase = 1;
     private static final String namaTabel = "gejala_epilepsi";
     private static final String tabelID = "id_gejala";
     private static final String tabelNamaGejala = "nama_gejala";
@@ -27,8 +33,76 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                     + tabelSolusiGejala + " TEXT)";
     private static final String query_hapus_tabel_gejala_epilepsi = "DROP TABLE IF EXISTS query_buat_tabel_gejala_epilepsi";
 
+    private static final String dbName = "EpilepsiDB";
+    private static int currentVersion = 3;
+
+    private Context context;
+    private String dbPath;
+
     public SQLiteHelper(Context context) {
-        super(context, namaDatabase, null, versiDatabase);
+        super(context, dbName, null, currentVersion);
+        this.context = context;
+        dbPath = context.getDatabasePath(dbName).toString();
+        Log.d("epilepsidb", "Database Init constructor ");
+    }
+
+
+    public void setupDb()	{
+        if (!checkDatabase())	{
+            copyDatabase();
+        }
+    }
+
+    public boolean checkDatabase(){
+        try	{
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(dbPath, null,
+                    SQLiteDatabase.OPEN_READONLY | SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+            String sql = SQLiteQueryBuilder.buildQueryString(true, "db_version", new String[]{"version"}
+                    , null, null, null, null, null);
+            Cursor cur = db.rawQuery(sql, null);
+            cur.moveToFirst();
+            int version = cur.getInt(0);
+            if (version != currentVersion)	{
+                Log.d("epilepsidb", "DB expired");
+                cur.close();
+
+                return false;
+            }
+            cur.close();
+        }
+        catch (SQLiteException e)	{
+            Log.d("epilepsidb", "DB not exists");
+            return false;
+        }
+        Log.d("epilepsidb", "DB exists");
+        return true;
+    }
+
+    public void copyDatabase()	{
+        Log.d("epilepsidb", "copy database");
+        try {
+            File file = new File(context.getDatabasePath(dbName).getParent());
+            file.mkdir();
+
+            String zipFilePath = context.getDatabasePath("epilepsidb.zip").toString();
+            Log.d("EpilepsiDBku", "ZIP FILE PATH " + zipFilePath);
+            ZipInputStream zis = new ZipInputStream(context.getResources().openRawResource(R.raw.epilepsidb));
+            zis.getNextEntry();
+
+            OutputStream os = new FileOutputStream(dbPath);
+            int byteRead;
+            byte[] buf = new byte[1024];
+            while ((byteRead = zis.read(buf)) > 0)	{
+                os.write(buf,0,byteRead);
+            }
+            zis.close();
+            os.close();
+
+        } catch (IOException e) {
+
+            Log.e("epilepsidb", e.getMessage());
+        }
+
     }
 
     @Override

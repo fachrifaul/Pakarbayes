@@ -25,13 +25,16 @@ import com.sistempakar.bayes.model.Rules;
 public class RulesActivity extends AppCompatActivity {
     private ListView listView;
     private RulesAdapter rulesAdapter;
-    private SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+    private SQLiteHelper sqLiteHelper;
 
     private String hasilGejala = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sqLiteHelper = new SQLiteHelper(this);
+
         setContentView(R.layout.activity_rules2);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -44,13 +44,16 @@ public class GejalaActivity extends AppCompatActivity {
     private TextView textViewHasil, textViewSolusi;
     private ArrayList<Gejala> arrayList = new ArrayList<>();
     private GejalaAdapter gejalaAdapter;
-    private SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+    private SQLiteHelper sqLiteHelper;
     private String  solusiPrediksi = "";
     private boolean hasilPrediksi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sqLiteHelper = new SQLiteHelper(this);
+
         setContentView(R.layout.activity_gejala);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

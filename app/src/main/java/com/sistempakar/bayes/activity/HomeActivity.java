@@ -9,13 +9,17 @@ import com.sistempakar.bayes.R;
 import com.sistempakar.bayes.database.SQLiteHelper;
 
 public class HomeActivity extends AppCompatActivity {
-    private SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+    private SQLiteHelper sqLiteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        addGejala();
+
+        sqLiteHelper = new SQLiteHelper(this);
+        sqLiteHelper.setupDb();
+
+//        addGejala();
 
         findViewById(R.id.button_konsultasi).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,14 +49,14 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void addGejala() {
-        String[] namaGejala = {"Batuk", "Pilek"};
-        String[] jenisGejala = {"positive", "negative"};
-        String[] solusiGejala = {"Memberi Aspirin", null};
-        for (int i = 0; i < namaGejala.length; i++) {
-            if(!sqLiteHelper.checkIfExist(namaGejala[i])){
-                sqLiteHelper.addRules(namaGejala[i], jenisGejala[i],solusiGejala[i]);
-            }
-        }
-    }
+//    private void addGejala() {
+//        String[] namaGejala = {"Batuk", "Pilek"};
+//        String[] jenisGejala = {"positive", "negative"};
+//        String[] solusiGejala = {"Memberi Aspirin", null};
+//        for (int i = 0; i < namaGejala.length; i++) {
+//            if(!sqLiteHelper.checkIfExist(namaGejala[i])){
+//                sqLiteHelper.addRules(namaGejala[i], jenisGejala[i],solusiGejala[i]);
+//            }
+//        }
+//    }
 }
