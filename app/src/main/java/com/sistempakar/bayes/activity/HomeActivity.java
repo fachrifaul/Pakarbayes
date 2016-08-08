@@ -34,6 +34,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, RulesActivity.class));
             }
         });
+        findViewById(R.id.button_tentang).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, TentangActivity.class));
+            }
+        });
         findViewById(R.id.button_bantuan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,12 +47,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.button_tentang).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, TentangActivity.class));
-            }
-        });
+
     }
 
 //    private void addGejala() {

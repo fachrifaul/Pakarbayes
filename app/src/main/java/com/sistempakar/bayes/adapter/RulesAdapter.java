@@ -30,7 +30,7 @@ public class RulesAdapter extends ArrayAdapter<Rules> {
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final Rules Rules = getItem(position);
+        final Rules rules = getItem(position);
 
         ViewHolder holder;
         LayoutInflater mInflater = (LayoutInflater) context
@@ -48,9 +48,9 @@ public class RulesAdapter extends ArrayAdapter<Rules> {
         holder.namaRules = (TextView) convertView.findViewById(R.id.nama_rules);
         holder.hasilRules = (TextView) convertView.findViewById(R.id.hasil_rules);
 
-        holder.idRules.setText(Rules.getIdRules());
-        holder.namaRules.setText(Rules.getNamaRules());
-        holder.hasilRules.setText(Rules.getPilihRules());
+        holder.idRules.setText(rules.getId());
+        holder.namaRules.setText(rules.getNama());
+        holder.hasilRules.setText(rules.getJenis());
 
 
         return convertView;

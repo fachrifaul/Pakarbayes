@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/id_gejala"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:hint="Nama Gejala"
-            android:singleLine="true" />
+            android:singleLine="true"/>
     </android.support.design.widget.TextInputLayout>
 
     <RadioGroup
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="positive" />
+            android:text="positive"/>
 
         <RadioButton
             android:id="@+id/radio_negative"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="false"
-            android:text="negative" />
+            android:text="negative"/>
     </RadioGroup>
 
 
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:hint="Solusi Gejala"
-            android:singleLine="true" />
+            android:singleLine="true"/>
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

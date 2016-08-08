@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -45,8 +46,9 @@ public class GejalaActivity extends AppCompatActivity {
     private ArrayList<Gejala> arrayList = new ArrayList<>();
     private GejalaAdapter gejalaAdapter;
     private SQLiteHelper sqLiteHelper;
-    private String  solusiPrediksi = "";
+    private String solusiPrediksi = "";
     private boolean hasilPrediksi;
+    private String TAG = "GejalaActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,7 @@ public class GejalaActivity extends AppCompatActivity {
                 String gejalanya = "";
                 for (int i = 0; i < arrayList.size(); i++) {
                     if (!arrayList.get(i).getPilihGejala().equals("")) {
-                        gejalanya += arrayList.get(i).getPilihGejala().toLowerCase() + " ";
+                        gejalanya += arrayList.get(i).getCodeGejala().toLowerCase() + " ";
                     }
                 }
                 System.out.println(gejalanya);
@@ -109,15 +111,16 @@ public class GejalaActivity extends AppCompatActivity {
         positiveText = new String[arrayListRulesPositive.size()];
         negativeText = new String[arrayListRulesNegative.size()];
 
+        Log.d(TAG, "positive: " + arrayListRulesPositive.size() + " negative: " + arrayListRulesNegative.size());
+        Log.d(TAG, "positive: " + positiveText.length + " negative: " + negativeText.length);
 
-        System.out.println(positiveText.length + " " + negativeText.length);
 
         for (int i = 0; i < arrayListRulesPositive.size(); i++) {
-            positiveText[i] = arrayListRulesPositive.get(i).getNamaRules().toLowerCase();
+            positiveText[i] = arrayListRulesPositive.get(i).getNama().toLowerCase();
         }
 
         for (int i = 0; i < arrayListRulesNegative.size(); i++) {
-            negativeText[i] = arrayListRulesNegative.get(i).getNamaRules().toLowerCase();
+            negativeText[i] = arrayListRulesNegative.get(i).getNama().toLowerCase();
         }
 
         final String[] unknownText1 = gejalanya.toLowerCase().split("\\s");
@@ -176,11 +179,13 @@ public class GejalaActivity extends AppCompatActivity {
 
         if (gejalanya.equals("")) {
             hasilPrediksi = false;
-        } else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("positive")) {
+        }
+        else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("positive")) {
             hasilPrediksi = true;
             Collection<String> gejalagejala = bayes.classify(Arrays.asList(unknownText1)).getFeatureset();
-            solusiPrediksi = tampilSoulisi(gejalagejala);
-        } else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("negative")) {
+            solusiPrediksi = showSolutionByCode(gejalagejala);
+        }
+        else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("negative")) {
             hasilPrediksi = false;
         }
 
@@ -225,16 +230,15 @@ public class GejalaActivity extends AppCompatActivity {
         bayes.setMemoryCapacity(500); // remember the last 500 learned classifications
     }
 
-    private String tampilSoulisi(Collection<String> gejalagejala) {
+    private String showSolutionByCode(Collection<String> gejalagejala) {
         String solusi = "";
 
         for (String gejala : gejalagejala) {
-            final Rules rules = sqLiteHelper.getDataByNamaGejala(gejala);
-            if (rules.getSolusiRules() != null) {
-                solusi += rules.getSolusiRules() + ",";
+            final Rules rules = sqLiteHelper.getDataByCodeGejala(gejala);
+            if (rules != null && rules.getSolusi() != null) {
+                solusi += rules.getSolusi() + ",";
             }
         }
-
         return solusi;
     }
 

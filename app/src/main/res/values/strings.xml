@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Pakar bayes</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="help">
+        Sistem pakar yang merupakan suatu program untuk penalaran seorang pakar dengan keahlian pada suatu wilayah pengetahuan tertentu, akan membantu dokter untuk melakukan diagnosa terhadap
+pasien dengan lebih cepat, efektif dan efisien. Hal ini dapat mengurangi kesalahan
+dalam menentukan suatu jenis penyakit (epilepsi).
+    </string>
 </resources>

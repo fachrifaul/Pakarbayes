@@ -21,14 +21,14 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ImageView
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/relativeLayout"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:layout_below="@+id/toolbar"
-        android:padding="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_logo_uin"
-        />
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="@string/help"/>
 
 </RelativeLayout>

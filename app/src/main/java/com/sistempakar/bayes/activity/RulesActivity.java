@@ -71,7 +71,7 @@ public class RulesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                final Rules rules = sqLiteHelper.getDataById(Integer.parseInt(sqLiteHelper.showAllRules().get(position).getIdRules()));
+                final Rules rules = sqLiteHelper.getDataById(Integer.parseInt(sqLiteHelper.showAllRules().get(position).getId()));
 
                 final String[] option = new String[]{"Edit", "Delete"};
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(RulesActivity.this, android.R.layout.select_dialog_item, option);
@@ -103,10 +103,10 @@ public class RulesActivity extends AppCompatActivity {
         final RadioButton radioPositive = (RadioButton) view.findViewById(R.id.radio_positive);
         final RadioButton radioNegative = (RadioButton) view.findViewById(R.id.radio_negative);
 
-        idGejala.setText(rules.getIdRules());
-        editNamaGelaja.setText(rules.getNamaRules());
-        editSolusiGelaja.setText(rules.getSolusiRules());
-        if (rules.getPilihRules().equals("positive")) {
+        idGejala.setText(rules.getId());
+        editNamaGelaja.setText(rules.getNama());
+        editSolusiGelaja.setText(rules.getSolusi());
+        if (rules.getJenis().equals("positive")) {
             radioPositive.setChecked(true);
             editSolusiGelaja.setVisibility(View.VISIBLE);
         } else {
@@ -179,7 +179,7 @@ public class RulesActivity extends AppCompatActivity {
 
     private void showDialogDelete(Rules rules) {
 
-        sqLiteHelper.deleteRules(Integer.parseInt(rules.getIdRules()));
+        sqLiteHelper.deleteRules(Integer.parseInt(rules.getId()));
 
 		/* restart activity */
         finish();

@@ -9,16 +9,22 @@ public class Gejala implements Serializable {
 
     public String idGejala, namaGejala;
     public String pilihGejala;
+    public String codeGejala;
 
 
     public Gejala(String idGejala, String namaGejala, String pilihGejala) {
         this.idGejala = idGejala;
         this.namaGejala = namaGejala;
         this.pilihGejala = pilihGejala;
+        this.codeGejala = namaGejala.toLowerCase().replace(" ", "");
     }
 
     public String getIdGejala() {
         return idGejala;
+    }
+
+    public String getCodeGejala() {
+        return codeGejala = namaGejala.toLowerCase().replace(" ", "");
     }
 
     public String getNamaGejala() {

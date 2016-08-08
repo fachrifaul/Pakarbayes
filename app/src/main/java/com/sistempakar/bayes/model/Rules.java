@@ -7,36 +7,37 @@ import java.io.Serializable;
  */
 public class Rules implements Serializable {
 
-    public String idRules, namaRules;
-    public String pilihRules;
-    public String solusiRules;
+    private String id;
+    private String nama;
+    private String jenis;
+    private String solusi;
+    private String code;
 
-
-    public Rules(String idRules, String namaRules, String pilihRules, String solusiRules) {
-        this.idRules = idRules;
-        this.namaRules = namaRules;
-        this.pilihRules = pilihRules;
-        this.solusiRules = solusiRules;
+    public Rules(String id, String nama, String jenis, String solusi, String code) {
+        this.id = id;
+        this.nama = nama;
+        this.jenis = jenis;
+        this.solusi = solusi;
+        this.code = code;
     }
 
-    public String getIdRules() {
-        return idRules;
+    public String getId() {
+        return id;
     }
 
-    public String getNamaRules() {
-        return namaRules;
+    public String getNama() {
+        return nama;
     }
 
-    public String getPilihRules() {
-        return pilihRules;
+    public String getJenis() {
+        return jenis;
     }
 
-    public String getSolusiRules() {
-        return solusiRules;
+    public String getSolusi() {
+        return solusi;
     }
 
-    public void setPilihRules(String pilihRules) {
-        this.pilihRules = pilihRules;
+    public String getCode() {
+        return code;
     }
-
 }
