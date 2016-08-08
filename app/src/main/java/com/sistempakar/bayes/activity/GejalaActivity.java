@@ -232,11 +232,15 @@ public class GejalaActivity extends AppCompatActivity {
 
     private String showSolutionByCode(Collection<String> gejalagejala) {
         String solusi = "";
+        ArrayList<String> listSolusi = new ArrayList<>();
 
         for (String gejala : gejalagejala) {
             final Rules rules = sqLiteHelper.getDataByCodeGejala(gejala);
             if (rules != null && rules.getSolusi() != null) {
-                solusi += rules.getSolusi() + ",";
+                if (!listSolusi.contains(rules.getSolusi())) {
+                    listSolusi.add(rules.getSolusi());
+                    solusi += rules.getSolusi() + ",";
+                }
             }
         }
         return solusi;
