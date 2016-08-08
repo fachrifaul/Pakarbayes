@@ -41,13 +41,13 @@ public class GejalaActivity extends AppCompatActivity {
 
     //    final String[] positiveText = positive.toLowerCase().split("\\s");
 //    final String[] negativeText = negative.toLowerCase().split("\\s");
-    private Button buttonPrediksi;
+    private Button buttonDiagnosa;
     private TextView textViewHasil, textViewSolusi;
     private ArrayList<Gejala> arrayList = new ArrayList<>();
     private GejalaAdapter gejalaAdapter;
     private SQLiteHelper sqLiteHelper;
-    private String solusiPrediksi = "";
-    private boolean hasilPrediksi;
+    private String solusiDiagnosa = "";
+    private boolean hasilDiagnosa;
     private String TAG = "GejalaActivity";
 
     @Override
@@ -68,7 +68,7 @@ public class GejalaActivity extends AppCompatActivity {
 
     private void initUI() {
         listView = (ListView) findViewById(R.id.list_gejala);
-        buttonPrediksi = (Button) findViewById(R.id.button_prediksi);
+        buttonDiagnosa = (Button) findViewById(R.id.button_diagnosa);
         textViewHasil = (TextView) findViewById(R.id.hasil);
         textViewSolusi = (TextView) findViewById(R.id.solusi);
 
@@ -86,7 +86,7 @@ public class GejalaActivity extends AppCompatActivity {
         gejalaAdapter = new GejalaAdapter(this, arrayList);
         listView.setAdapter(gejalaAdapter);
 
-        buttonPrediksi.setOnClickListener(new View.OnClickListener() {
+        buttonDiagnosa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String gejalanya = "";
@@ -178,15 +178,15 @@ public class GejalaActivity extends AppCompatActivity {
 
 
         if (gejalanya.equals("")) {
-            hasilPrediksi = false;
+            hasilDiagnosa = false;
         }
         else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("positive")) {
-            hasilPrediksi = true;
+            hasilDiagnosa = true;
             Collection<String> gejalagejala = bayes.classify(Arrays.asList(unknownText1)).getFeatureset();
-            solusiPrediksi = showSolutionByCode(gejalagejala);
+            solusiDiagnosa = showSolutionByCode(gejalagejala);
         }
         else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("negative")) {
-            hasilPrediksi = false;
+            hasilDiagnosa = false;
         }
 
 
@@ -194,8 +194,8 @@ public class GejalaActivity extends AppCompatActivity {
                 HasilActivity.class);
         intent.putExtra("hasil_positive", positive);
         intent.putExtra("hasil_negative", negative);
-        intent.putExtra("hasil", hasilPrediksi);
-        intent.putExtra("solusi", solusiPrediksi);
+        intent.putExtra("hasil", hasilDiagnosa);
+        intent.putExtra("solusi", solusiDiagnosa);
         startActivity(intent);
 
 
