@@ -1,4 +1,4 @@
-package com.sistempakar.bayes.activity;
+package com.sistempakar.bayes.activity.lama;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -191,7 +191,7 @@ public class GejalaActivity extends AppCompatActivity {
 
 
         Intent intent = new Intent(GejalaActivity.this,
-                HasilActivity.class);
+                com.sistempakar.bayes.activity.HasilActivity.class);
         intent.putExtra("hasil_positive", positive);
         intent.putExtra("hasil_negative", negative);
         intent.putExtra("hasil", hasilDiagnosa);

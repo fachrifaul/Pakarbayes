@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff">
+
+    <TextView
+        android:id="@+id/tvItemNameAtResultChild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/percentageLayout"
+        android:minHeight="30dp"
+        android:text="Item Name"
+        android:textColor="#ff000099"
+        android:textSize="13dp"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/percentageLayout"
+        android:background="#ff888888"/>
+
+    <TextView
+        android:id="@+id/tvItemValueAtResultChild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="3dp"
+        android:layout_toLeftOf="@+id/tvPercentageAtResultChild"
+        android:text="0.0"
+        android:textColor="#ff000099"/>
+
+    <TextView
+        android:id="@+id/tvPercentageAtResultChild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="30dp"
+        android:text="%"
+        android:textColor="#ff000099"/>
+
+    <LinearLayout
+        android:id="@+id/percentageLayout"
+        android:layout_width="100dp"
+        android:layout_height="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvPercentageAtResultChild"
+        android:layout_marginRight="10dp"
+        android:background="#e8f2fe"
+        android:orientation="horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/tvItemNameAtResultChild">
+
+        <View
+            android:id="@+id/cellSeperatorView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ff888888"/>
+    </LinearLayout>
+</RelativeLayout>

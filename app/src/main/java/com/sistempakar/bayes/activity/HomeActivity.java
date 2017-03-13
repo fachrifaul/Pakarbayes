@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.sistempakar.bayes.R;
+import com.sistempakar.bayes.activity.baru.InfoActivity;
 import com.sistempakar.bayes.database.SQLiteHelper;
 
 public class HomeActivity extends AppCompatActivity {
@@ -24,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.button_konsultasi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, GejalaActivity.class));
+                startActivity(new Intent(HomeActivity.this, InfoActivity.class));
             }
         });
 

@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".Main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.HomeActivity">
@@ -15,13 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.GejalaActivity"/>
         <activity android:name=".activity.RulesActivity"/>
-        <activity android:name=".activity.HasilActivity"/>
         <activity android:name=".activity.TentangActivity"/>
         <activity android:name=".activity.BantuanActivity"/>
-
         <activity android:name=".activity.GridCalcActivity"/>
+
+        <activity android:name=".activity.lama.GejalaActivity"/>
+        <activity android:name=".activity.lama.HasilActivity"/>
+
+        <activity android:name=".activity.baru.QuestionActivity"/>
+        <activity android:name=".activity.baru.ResultActivity"/>
+        <activity android:name=".activity.baru.InfoActivity"/>
     </application>
 
 </manifest>

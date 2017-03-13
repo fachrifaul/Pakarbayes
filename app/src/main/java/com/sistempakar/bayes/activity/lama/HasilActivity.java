@@ -1,4 +1,4 @@
-package com.sistempakar.bayes.activity;
+package com.sistempakar.bayes.activity.lama;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
