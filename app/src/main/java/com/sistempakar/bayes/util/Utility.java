@@ -1,6 +1,6 @@
 package com.sistempakar.bayes.util;
 
-import com.sistempakar.bayes.activity.QuestionActivity;
+import com.sistempakar.bayes.activity.baru.QuestionActivity;
 
 import java.util.LinkedHashMap;
 

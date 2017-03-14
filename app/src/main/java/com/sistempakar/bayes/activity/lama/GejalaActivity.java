@@ -179,19 +179,16 @@ public class GejalaActivity extends AppCompatActivity {
 
         if (gejalanya.equals("")) {
             hasilDiagnosa = false;
-        }
-        else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("positive")) {
+        } else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("positive")) {
             hasilDiagnosa = true;
             Collection<String> gejalagejala = bayes.classify(Arrays.asList(unknownText1)).getFeatureset();
             solusiDiagnosa = showSolutionByCode(gejalagejala);
-        }
-        else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("negative")) {
+        } else if (bayes.classify(Arrays.asList(unknownText1)).getCategory().toLowerCase().equals("negative")) {
             hasilDiagnosa = false;
         }
 
 
-        Intent intent = new Intent(GejalaActivity.this,
-                com.sistempakar.bayes.activity.HasilActivity.class);
+        Intent intent = new Intent(GejalaActivity.this, HasilActivity.class);
         intent.putExtra("hasil_positive", positive);
         intent.putExtra("hasil_negative", negative);
         intent.putExtra("hasil", hasilDiagnosa);
